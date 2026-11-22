@@ -23,7 +23,7 @@ h1,h2,h3,.display{font-family:'Baloo Da 2','Hind Siliguri',sans-serif;line-heigh
 img{max-width:100%;display:block}
 button{font-family:inherit;cursor:pointer;min-height:44px;color:inherit;background:none}
 a{color:inherit}
-svg.icn{flex-shrink:0;display:block}
+svg.icn{flex-shrink:0;display:block;margin:0;padding:0}
 .wrap{max-width:1180px;margin:0 auto;padding:0 18px}
 .topbar{background:#2E2320;color:#F3E7D3;font-size:.86rem;padding:8px 0;overflow:hidden}
 .topbar b{color:var(--gold2)}
@@ -82,9 +82,9 @@ nav.main button.active{background:var(--ink);color:#fff}
 /* TRUST */
 .trust{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:26px 0 6px}
 .trust .tcard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px 18px 20px;display:flex;flex-direction:column;align-items:center;text-align:center;height:100%}
-.ic-badge{width:56px;height:56px;border-radius:50%;background:var(--rose-soft);color:var(--rose);display:grid;place-items:center;flex-shrink:0}
+.ic-badge{width:56px;height:56px;border-radius:50%;background:var(--rose-soft);color:var(--rose);display:flex;align-items:center;justify-content:center;flex-shrink:0;line-height:0;padding:0;text-align:center}
 .ic-badge.gold{background:#F7EFDD;color:var(--gold)}
-.ic-badge svg{width:26px;height:26px}
+.ic-badge svg,.ic-badge svg.icn{width:26px;height:26px;display:block;margin:0;padding:0;flex-shrink:0}
 .trust b{display:block;font-size:1rem;font-family:'Baloo Da 2';margin:13px 0 5px;line-height:1.35}
 .trust .tdesc{color:var(--muted);font-size:.88rem;line-height:1.55;display:block}
 /* SECTIONS */
@@ -157,10 +157,10 @@ select.sort{border:1.5px solid var(--line);border-radius:12px;padding:11px;font-
 .contact-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:22px;align-items:start}
 .info-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
 .info-row{display:flex;gap:13px;align-items:flex-start;margin-bottom:18px}
-.info-row .ic-badge{width:44px;height:44px}
-.info-row .ic-badge svg{width:21px;height:21px}
+.info-row .ic-badge{width:44px;height:44px;display:flex;align-items:center;justify-content:center;flex-shrink:0;line-height:0}
+.info-row .ic-badge svg,.info-row .ic-badge svg.icn{width:21px;height:21px;display:block;margin:0;flex-shrink:0}
 .info-row b{font-family:'Baloo Da 2';display:block;line-height:1.35}
-.info-row span,.info-row a{color:var(--muted);line-height:1.55;display:block}
+.info-row span:not(.ic-badge),.info-row a{color:var(--muted);line-height:1.55;display:block}
 form.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
 label{display:block;font-weight:600;margin:13px 0 5px;font-size:.95rem}
 label:first-child{margin-top:0}
@@ -234,10 +234,10 @@ footer{background:#2E2320;color:#E9DCC8;margin-top:56px}
 .pd-actions .btn{flex:1 1 0}
 .pd-trust{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:22px}
 .pd-trust .pt{display:flex;gap:11px;align-items:center;background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:11px 13px}
-.pd-trust .ic-badge{width:40px;height:40px}
-.pd-trust .ic-badge svg{width:20px;height:20px}
+.pd-trust .ic-badge{width:40px;height:40px;display:flex;align-items:center;justify-content:center;flex-shrink:0;line-height:0}
+.pd-trust .ic-badge svg,.pd-trust .ic-badge svg.icn{width:20px;height:20px;display:block;margin:0;flex-shrink:0}
 .pd-trust b{font-family:'Baloo Da 2';font-size:.92rem;display:block;line-height:1.3}
-.pd-trust span{color:var(--muted);font-size:.78rem;display:block;line-height:1.4}
+.pd-trust span:not(.ic-badge){color:var(--muted);font-size:.78rem;display:block;line-height:1.4}
 .pcard .pimg{cursor:pointer}
 .pcard .pname{cursor:pointer}
 .pcard .pname:hover{color:var(--rose)}
@@ -310,8 +310,8 @@ footer{background:#2E2320;color:#E9DCC8;margin-top:56px}
 @media(max-width:640px){
   .trust{grid-template-columns:1fr;gap:10px}
   .trust .tcard{display:grid;grid-template-columns:50px 1fr;grid-template-rows:auto auto;align-items:center;column-gap:14px;text-align:left;padding:14px 16px}
-  .trust .ic-badge{grid-row:1/3;width:50px;height:50px}
-  .trust .ic-badge svg{width:24px;height:24px}
+  .trust .ic-badge{grid-row:1/3;width:50px;height:50px;display:flex;align-items:center;justify-content:center;line-height:0}
+  .trust .ic-badge svg{width:24px;height:24px;display:block;margin:0}
   .trust b{margin:0 0 2px;font-size:1rem}
   .trust .tdesc{font-size:.87rem;line-height:1.5}
   .hero-cta{flex-direction:column;gap:10px}
@@ -336,6 +336,9 @@ footer{background:#2E2320;color:#E9DCC8;margin-top:56px}
   .cat b{font-size:1rem}
   .cat .cdesc{font-size:.82rem}
 }
+/* Icon-circle centering safeguard: badge is a <span>, so generic span rules must never turn it back into a plain block */
+span.ic-badge{display:flex;align-items:center;justify-content:center;line-height:0}
+span.ic-badge>svg,span.ic-badge>svg.icn{display:block;margin:0;flex-shrink:0}
 </style>
 </head>
 <body>
